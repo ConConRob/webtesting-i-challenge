@@ -34,4 +34,13 @@ describe("Weapon enhancers", () => {
       expect(enhancer.fail({ ...weapon, enhancement: 19 })).toEqual({ ...weapon, enhancement: 18, durability: weapon.durability - 10 })
     })
   })
+
+  describe("Get name of weapon", () => {
+    it("Weapon name if no enhancement", () => {
+      expect(enhancer.get({ ...weapon, enhancement: 0 })).toEqual({ ...weapon, enhancement: 0 })
+    })
+    it("Weapon has enhancement", () => {
+      expect(enhancer.get(weapon)).toEqual({ ...weapon, name: `[+${weapon.enhancement}] ${weapon.name}` })
+    })
+  })
 })
