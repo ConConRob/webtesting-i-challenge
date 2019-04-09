@@ -5,18 +5,47 @@ module.exports = {
   get,
 };
 
+//item
+/*
+{
+  name,
+  durability,
+  enhancement
+}
+*/
+
+
 function succeed(item) {
-  return { ...item };
+  let enhancement = item.enhancement
+  if(enhancement <20){
+    ++enhancement;
+  }
+  return { ...item, enhancement };
 }
 
 function fail(item) {
-  return { ...item };
+  let enhancement = item.enhancement;
+  let durability = item.durability;
+  if(enhancement < 15){
+    durability = durability -5;
+  }else {
+    durability = durability - 10
+    if(enhancement >= 17){
+      --enhancement;
+    }
+  } 
+  return { ...item, enhancement, durability };
 }
 
 function repair(item) {
-  return { ...item };
+  return { ...item, durability: 100 };
 }
 
 function get(item) {
-  return { ...item };
+  let name = item.name;
+  const enhancement = item.enhancement
+  if(enhancement> 0){
+    name = `[+${enhancement}] ${name}`
+  }
+  return { ...item, name };
 }
